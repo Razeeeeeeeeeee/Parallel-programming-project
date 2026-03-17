@@ -82,7 +82,10 @@ def timed_generate(model, tokenizer, texts, num_beams,
     with torch.no_grad():
         model.generate(**enc, num_beams=num_beams,
                        max_new_tokens=max_new_tokens,
-                       early_stopping=True)
+                       early_stopping=True,
+                       max_length=None,
+                       pad_token_id = tokenizer.eos_token_id
+                       )
     reset_gpu_memory()
 
     for btexts in batch(texts, batch_size):
@@ -99,6 +102,7 @@ def timed_generate(model, tokenizer, texts, num_beams,
                 **enc,
                 num_beams=num_beams,
                 max_new_tokens=max_new_tokens,
+                max_length=None,
                 early_stopping=True,
             )
 
@@ -140,7 +144,7 @@ def run_translation(dataset_name: str, wmt_year: str):
     MODEL_ID = "facebook/wmt19-en-de"
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
     model = AutoModelForSeq2SeqLM.from_pretrained(
-        MODEL_ID, torch_dtype=torch.float16 if DEVICE=="cuda" else torch.float32
+        MODEL_ID, dtype=torch.float16 if DEVICE=="cuda" else torch.float32
     ).to(DEVICE).eval()
 
     ds = load_dataset(f"wmt/{wmt_year}", "de-en",
@@ -184,7 +188,7 @@ def run_summarization():
     MODEL_ID = "facebook/bart-large-cnn"
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
     model = AutoModelForSeq2SeqLM.from_pretrained(
-        MODEL_ID, torch_dtype=torch.float16 if DEVICE=="cuda" else torch.float32
+        MODEL_ID, dtype=torch.float16 if DEVICE=="cuda" else torch.float32
     ).to(DEVICE).eval()
 
     ds = load_dataset("cnn_dailymail", "3.0.0", split="test")
@@ -233,10 +237,10 @@ def run_lm_generation():
     print(f"{'='*55}")
 
     MODEL_ID = "gpt2-medium"   # or "gpt2-xl" if memory allows
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, padding_side = "left")
     tokenizer.pad_token = tokenizer.eos_token
     model = AutoModelForCausalLM.from_pretrained(
-        MODEL_ID, torch_dtype=torch.float16 if DEVICE=="cuda" else torch.float32
+        MODEL_ID, dtype=torch.float16 if DEVICE=="cuda" else torch.float32
     ).to(DEVICE).eval()
 
     ds = load_dataset("wikitext", "wikitext-103-raw-v1", split="test")

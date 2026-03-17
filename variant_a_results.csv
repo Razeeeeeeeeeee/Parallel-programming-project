@@ -1,0 +1,17 @@
+task,dataset,beam_width,mean_latency_ms,p95_latency_ms,throughput_tps,peak_gpu_mb,quality_metric,quality_value
+translation,wmt14,2,23.914,40.874,190.51,590.7,BLEU,22.4080
+translation,wmt14,4,25.171,43.792,179.44,627.4,BLEU,24.0698
+translation,wmt14,8,26.861,46.629,167.63,709.1,BLEU,24.6970
+translation,wmt14,16,35.209,57.898,132.97,878.8,BLEU,26.5563
+translation,wmt17,2,34.157,52.501,131.49,590.5,BLEU,38.1392
+translation,wmt17,4,36.831,62.764,123.79,643.5,BLEU,39.8316
+translation,wmt17,8,40.021,74.503,116.39,735.3,BLEU,40.0292
+translation,wmt17,16,47.481,83.053,98.02,929.4,BLEU,36.5318
+summarization,cnn_dailymail,2,54.073,114.308,47.65,936.7,ROUGE-1,25.7199
+summarization,cnn_dailymail,4,71.674,166.891,40.61,1064.5,ROUGE-1,24.8070
+summarization,cnn_dailymail,8,107.688,358.115,28.56,1327.9,ROUGE-1,20.0442
+summarization,cnn_dailymail,16,179.455,412.744,18.00,1856.9,ROUGE-1,14.8908
+lm_generation,wikitext-103,2,13.268,13.906,301.62,1360.2,N/A,0.0000
+lm_generation,wikitext-103,4,15.354,18.919,262.03,2000.0,N/A,0.0000
+lm_generation,wikitext-103,8,20.065,25.779,202.23,3298.7,N/A,0.0000
+lm_generation,wikitext-103,16,40.468,49.532,104.74,5901.5,N/A,0.0000
