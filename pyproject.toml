@@ -7,6 +7,9 @@ requires-python = ">=3.12"
 dependencies = [
     "accelerate>=1.13.0",
     "datasets>=4.7.0",
+    "kaleido==0.2.1",
+    "pandas>=3.0.1",
+    "plotly>=6.6.0",
     "protobuf>=7.34.0",
     "rouge-score>=0.1.2",
     "sacrebleu>=2.6.0",
