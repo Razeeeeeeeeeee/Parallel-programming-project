@@ -479,7 +479,7 @@ def run_summarization():
         reset_gpu()
         decoded, lats, tps = timed_generate_seq2seq(
             model, tokenizer, arts,
-            num_beams=k, max_new_tokens=142, batch_size=2,
+            num_beams=k, max_new_tokens=142, batch_size=4,
             min_length=56,          # Force summaries to be at least 56 tokens
             length_penalty=2.0      # Heavily reward longer sequences,
             )
